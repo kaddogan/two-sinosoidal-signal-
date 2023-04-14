@@ -1,0 +1,71 @@
+clc;
+clear;
+
+
+%Sinüs sinyalleri ile işlemler.
+a1 = input('Birinci dalganin yuksekligi: ');
+f1 = input('Birinci dalganin frekansi (Hz): ');
+disp(' ');
+a2 = input('Ikinci dalganin yuksekligi: ');
+f2 = input('Ikinci dalganin frekansi (Hz): ');
+
+zaman = 0:0.001:1;
+sinus1 = a1*sin(2*pi*f1*zaman);
+sinus2 = a2*sin(2*pi*f2*zaman);
+
+disp(' ');
+
+disp(' ISLEMI SECINIZ');
+disp(' ==============');
+disp('1. Dalgalari topla');
+disp('2. Dalgalari cikar');
+disp('3. Dalgalari carp');
+disp('4. Dalgalari bol');
+
+disp(' ');
+secim = input('Secenek: ');
+
+switch secim
+case 1
+ netice = sinus1 + sinus2;
+case 2
+ netice = sinus1 - sinus2;
+case 3
+ netice = sinus1 .* sinus2;
+case 4
+ netice = sinus1 ./ sinus2;
+end
+
+subplot(3,1,1);
+plot(zaman,sinus1);
+ylabel('yukseklik');
+grid on
+title('1.Sinus dalgasi');
+axis([-0.1 1.1 -(a1+1) (a1+1)]);
+
+subplot(3,1,2);
+plot(zaman,sinus2);
+ylabel('yukseklik');
+grid on
+title('2.Sinus dalgasi');
+axis([-0.1 1.1 -(a2+1) (a2+1)]);
+
+subplot(3,1,3);
+plot(zaman,netice);
+ylabel('yukseklik');
+grid on
+xlabel('x(s)')
+
+
+switch secim
+case 1
+ title('Iki Sinus dalgasinin Toplami');
+case 2
+ title('Iki Sinus dalgasinin farki');
+case 3
+ title('Iki Sinus dalgasinin Carpimi');
+case 4
+ title('Iki Sinus dalgasinin Bolumu');
+end
+
+disp('Grafikler cizilmistir…');
